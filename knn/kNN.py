@@ -6,15 +6,21 @@ def createDataSet():
     labels = ['A','A','B','B']
     return group, labels
 
-# def createFile(filename):
-#     fr = open(filename)
-#     for i in range(1000):
+def createFile(filename):
+    fr = open(filename, "w")
+    for i in range(1000):
+        t = random.randint(1,4)
+        if(t == 0):
+            fr.write(str(random.randint(23000,50000)) + "\t" + str(absolute(random.random())) + "\t" + str(absolute(random.random()*10)) + "\t" + str(t) + "\r")
+        elif(t == 1):
+            fr.write(str(random.randint(8000,25000)) + "\t" + str(absolute(random.random())) + "\t" + str(absolute(random.random())*10) + "\t" + str(t) + "\r")
+        elif(t == 2):
+            fr.write(str(random.randint(500,10000)) + "\t" + str(absolute(random.random())) + "\t" + str(absolute(random.random())*10) + "\t" + str(t) + "\r")
 
 def file2matrix(filename):
     fr = open(filename)
     numberOfLines = len(fr.readlines())
     returnMat = zeros((numberOfLines,3))
-    print("returnMat => ", returnMat)
     classLabelVector = []
     fr = open(filename)
     index = 0
@@ -22,7 +28,7 @@ def file2matrix(filename):
         line = line.strip()
         listFromLine = line.split('\t')
         returnMat[index,:] = listFromLine[0:3]
-        classLabelVector.append(listFromLine[-1])
+        classLabelVector.append(int(listFromLine[-1]))
         index += 1
     return returnMat,classLabelVector
 
